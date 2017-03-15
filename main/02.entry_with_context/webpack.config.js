@@ -9,7 +9,25 @@ module.exports = {
   entry: './entry.js',
 
   output: {
+    pathinfo: true,
     filename: 'bundle.js',
     path: path.join(__dirname, 'build')
+  },
+
+  // use babel to compile the ES6 code
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015', 'stage-1', 'stage-2', 'stage-3']
+            }
+          }
+        ],
+      }
+    ],
   },
 }

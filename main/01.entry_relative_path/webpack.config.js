@@ -7,4 +7,21 @@ module.exports = {
     filename: 'bundle.js',
     path: './build'
   },
+
+  // use babel to compile the ES6 code
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015', 'stage-1', 'stage-2', 'stage-3']
+            }
+          }
+        ],
+      }
+    ],
+  },
 }
