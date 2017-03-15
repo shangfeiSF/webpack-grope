@@ -3,13 +3,13 @@ var path = require('path')
 module.exports = {
   context: path.join(__dirname, 'src'),
 
-  entry: [
-    './vendor.js',
-    './entry.js'
-  ],
+  entry: {
+    vendor: './vendor.js',
+    entry: './entry.js'
+  },
 
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.join(__dirname, 'build')
   },
 
