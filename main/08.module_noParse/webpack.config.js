@@ -1,4 +1,5 @@
 var path = require('path')
+var DashboardPlugin = require('webpack-dashboard/plugin')
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -19,6 +20,9 @@ module.exports = {
   },
 
   module: {
+    // Ignored files should not have calls to import, require, define or any other importing mechanism.
+    // This can boost build performance when ignoring large libraries.
+    noParse: /noParseFile/,
     rules: [
       {
         test: /\.js$/,
@@ -32,5 +36,9 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+
+  plugins: [
+    new DashboardPlugin()
+  ]
 }
