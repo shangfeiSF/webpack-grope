@@ -1,7 +1,7 @@
 {
   "name": "webpack-grope",
-  "version": "0.0.1",
   "description": "Webpack@2.2.1",
+  "version": "0.0.1",
   "dependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.0",
@@ -10,8 +10,17 @@
     "babel-preset-stage-1": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
     "babel-preset-stage-3": "^6.22.0",
-    "express": "^4.15.2",
     "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "colors": "^1.1.2",
+    "gulp": "^3.9.1",
+    "gulp-copy": "^1.0.0",
+    "gulp-open": "^2.0.0",
+    "lodash": "^4.17.4",
+    "nopt": "^4.0.1",
+    "webpack-dashboard": "^0.3.0",
+    "webpack-dev-server": "^2.4.2"
   },
   "repository": {
     "type": "git",

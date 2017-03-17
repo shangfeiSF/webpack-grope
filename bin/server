@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+var fs = require('fs')
+var path = require('path')
+
+var gulp = require('gulp')
+var copy = require('gulp-copy')
+
+var server = require('../server/index')
+
+var main = path.join(__dirname, '../main')
+var build = path.join(__dirname, '../__build__')
+
+gulp.task('default', function () {
+  return gulp.src(path.join(main, '/**/index.html'))
+    .pipe(gulp.dest(build))
+    .pipe(server.start())
+})
