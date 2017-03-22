@@ -1,3 +1,4 @@
+var webpack = require('webpack')
 var WebpackDevServer = require('webpack-dev-server')
 
 var options = require('./options')
@@ -19,10 +20,14 @@ var servers = targetDirs.map(function (dir) {
   var port = devConfigs[index]._port_
   delete  devConfigs[index]._port_
 
+  if (compilers[index].output.publicPath) {
+    compilers[index].output.publicPath = compilers[index].output.publicPath.replace(/http\:\/\/localhost\:8080/g, 'http://localhost:' + port)
+  }
+
   return {
     index: index,
     port: port,
-    main: new WebpackDevServer(compilers[index], devConfigs[index])
+    main: new WebpackDevServer(webpack(compilers[index]), devConfigs[index])
   }
 })
 

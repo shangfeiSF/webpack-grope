@@ -1,7 +1,6 @@
 var os = require('os')
 var path = require('path')
 
-var webpack = require('webpack')
 var Dashboard = require('webpack-dashboard')
 var DashboardPlugin = require('webpack-dashboard/plugin')
 
@@ -45,7 +44,7 @@ webpackConfigInfos.forEach(function (info) {
     }
   }
 
-  compilers[info.index] = webpack(webpackConfig)
+  compilers[info.index] = webpackConfig
 })
 
 module.exports = compilers
