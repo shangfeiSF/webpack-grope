@@ -1,2 +1,38 @@
 #!/usr/bin/env node
-require('../server/index').start()
+var fs = require('fs')
+var path = require('path')
+var child_process = require('child_process')
+
+var Promise = require('bluebird')
+var execAsync = Promise.promisify(child_process.exec, {
+  context: child_process,
+  multiArgs: true
+})
+
+var lib = path.join(__dirname, 'lib')
+var files = fs.readdirSync(lib)
+
+var gulpFile = files.filter(function (file) {
+  return path.basename(file) === path.basename(__filename) + '.gulp.js'
+}).pop()
+
+var gulpCmd = ['gulp', '--gulpfile', path.join(lib, gulpFile)]
+
+var server = require('../server/index')
+var params = server.urls().map(function (url) {
+  return ['--urls', url].join(' ')
+}).join(' ')
+var open = gulpCmd.concat(['open']).concat(params)
+
+var rejected = function (error) {
+  console.log(error.cmd)
+  console.log(error.message)
+}
+
+execAsync(open.join(' '), __dirname)
+  .then(function (details) {
+    console.log(details[0])
+    console.log(details[1])
+
+    server.start()
+  }, rejected)
