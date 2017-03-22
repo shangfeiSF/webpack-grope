@@ -4,7 +4,7 @@ var lodash = require('lodash')
 var dirSpec = require('../constants/dirSpec')
 
 var knowns = {
-  'index': String,
+  'index': Array,
   'quiet': Boolean
 }
 
