@@ -1,3 +1,4 @@
+var os = require('os')
 var path = require('path')
 
 var webpack = require('webpack')
@@ -11,7 +12,7 @@ var webpackConfigFile = 'webpack.config.js'
 var webpackConfigPath = path.join(dirSpec.mainDirPath, dirSpec.mainSubDirNames[0], webpackConfigFile)
 
 var targetDir = dirSpec.mainSubDirNames.filter(function (dir) {
-  return options.index === dir.split('\.').shift()
+  return options.index == dir.split('\.').shift()
 })
 if (targetDir.length) {
   webpackConfigPath = path.join(dirSpec.mainDirPath, targetDir[0], webpackConfigFile)
@@ -26,14 +27,13 @@ if (targetDir.length) {
   webpackConfig.entry = path.join(dirSpec.mainDirPath, dirSpec.mainSubDirNames[0], webpackConfig.entry)
 }
 
-var commonPlugins = [
-  new DashboardPlugin(new Dashboard().setData)
-]
-
-if (webpackConfig.plugins) {
-  webpackConfig.plugins = webpackConfig.plugins.concat(commonPlugins)
-} else {
-  webpackConfig.plugins = commonPlugins
+var platform = os.platform()
+if (platform === 'linux' || platform === 'darwin') {
+  if (webpackConfig.plugins) {
+    webpackConfig.plugins.push(new DashboardPlugin(new Dashboard().setData))
+  } else {
+    webpackConfig.plugins = [new DashboardPlugin(new Dashboard().setData)]
+  }
 }
 
 var compiler = webpack(webpackConfig)

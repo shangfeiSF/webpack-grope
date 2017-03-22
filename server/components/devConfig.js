@@ -1,15 +1,19 @@
 var fs = require('fs')
+var os = require('os')
 var path = require('path')
-
-var express = require('express')
 
 var options = require('./options')
 var dirSpec = require('../constants/dirSpec')
 
+var platform = os.platform()
+var index = options.index || '01'
+var dir = dirSpec.mainSubDirNames[+index - 1]
+var html = fs.readFileSync(path.join(dirSpec.mainDirPath, dir, 'index.html'), {encoding: 'utf-8'})
+
 var devConfig = {
   quiet: !!options.quiet,
 
-  publicPath: '/__build__/',
+  publicPath: '/' + index + '/assets/',
 
   headers: {
     "X-Custom-Header": "yes"
@@ -17,28 +21,16 @@ var devConfig = {
 
   inline: true,
 
-  noInfo: true,
+  noInfo: (platform === 'linux' || platform === 'darwin') ? true : false,
 
   stats: {
     colors: true
   },
 
   setup: function (app) {
-    dirSpec.mainSubDirNames.forEach(function (dir) {
-      var index = dir.split('\.')[0]
-
-      var assetsDirName = 'assets'
-      var indexHtml = 'index.html'
-
-      var assetsPath = '/' + index + '/' + assetsDirName + '/'
-      var assetsDir = path.join(dirSpec.buildDirPath, dir, assetsDirName)
-
-      app.use(assetsPath, express.static(assetsDir))
-
-      var indexPath = '/' + index + '/' + indexHtml
-      var indexDir = path.join(dirSpec.buildDirPath, dir, indexHtml)
-
-      app.use(indexPath, express.static(indexDir))
+    app.use('/' + index + '/index.html', function (req, res) {
+      res.writeHead(200)
+      res.end(html)
     })
   }
 }
