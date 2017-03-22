@@ -1,4 +1,4 @@
-import { TEN, TWENTY } from 'numbers'
+import {TEN, TWENTY} from 'numbers'
 
 import * as math from 'math'
 

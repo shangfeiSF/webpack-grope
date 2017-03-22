@@ -16,7 +16,7 @@ module.exports = {
     hashDigest: 'base64',
     hashDigestLength: 15,
     chunkFilename: '[name].[id].[chunkhash].js',
-    publicPath: 'http://localhost:8080/assets/07/'
+    publicPath: 'http://localhost:8080/08/assets/'
   },
 
   module: {

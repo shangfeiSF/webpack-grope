@@ -12,7 +12,7 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.join(__dirname, 'build'),
     chunkFilename: '[name].[id].[chunkhash].js',
-    publicPath: 'http://localhost:8080/assets/06/'
+    publicPath: 'http://localhost:8080/06/assets/'
   },
 
   module: {
