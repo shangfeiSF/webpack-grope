@@ -17,8 +17,9 @@ var browser = os.platform() === 'linux' ?
 
 gulp.task('open', function () {
   var begin = gulp.src(__filename)
+  var urls = [].concat(options.urls)
 
-  options.urls.forEach(function (url) {
+  urls.forEach(function (url) {
     begin.pipe(open({
       uri: url,
       app: browser

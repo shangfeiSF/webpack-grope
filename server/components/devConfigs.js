@@ -3,18 +3,11 @@ var os = require('os')
 var path = require('path')
 
 var options = require('./options')
+var targetDirs = require('./targets')
 var dirSpec = require('../constants/dirSpec')
 
 var BASEPORT = 8081
 var PLATFORM = os.platform()
-
-var targetDirs = dirSpec.mainSubDirNames
-if (options.index) {
-  targetDirs = dirSpec.mainSubDirNames.filter(function (dir) {
-    var index = dir.split('\.').shift()
-    return options.index.indexOf(index) > -1
-  })
-}
 
 var devConfigs = {}
 targetDirs.forEach(function (dir) {
@@ -35,7 +28,7 @@ targetDirs.forEach(function (dir) {
 
     inline: true,
 
-    noInfo: (PLATFORM === 'linux' || PLATFORM === 'darwin') ? true : false,
+    noInfo: ((PLATFORM === 'linux' || PLATFORM === 'darwin') && targetDirs.length == 1) ? true : false,
 
     stats: {
       colors: true
