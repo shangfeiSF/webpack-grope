@@ -2,21 +2,21 @@
 
 ### webpack.config.js所在的目录
 
-`main/10.resolve.alias/`
+`/Users/webpack-grope/main/10.resolve_alias/`
 
 ### 组件所在的目录
 
-`main/10.resolve.alias/src/node_modules/`
-`main/10.resolve.alias/src/actions/`
-`main/10.resolve.alias/src/comps/`
+`/Users/webpack-grope/main/10.resolve_alias/src/node_modules/`
+`/Users/webpack-grope/main/10.resolve_alias/src/actions/`
+`/Users/webpack-grope/main/10.resolve_alias/src/comps/`
 
 ### 引用文件
 
-`main/10.resolve.alias/src/resolve_*.js`
+`/Users/webpack-grope/main/10.resolve_alias/src/resolve_*.js`
 
 ### 入口文件
 
-`main/10.resolve.alias/src/entry.js`
+`/Users/webpack-grope/main/10.resolve_alias/src/entry.js`
 
 #### webpack.config.js中context字段声明的路径
 
@@ -38,40 +38,42 @@ reslove: {
 
 ## alias解析表
 
+#### 设置 `@mainSrc = /Users/webpack-grope/main/src`
+
 #### 无配置
 
 | resolve.alias | import 'app' | import 'app/plugins.js' |
 |--------------------|--------------------|-------------------|
-| {} | /main/src/node_modules/app/index.js | /main/src/node_modules/app/plugins.js |
+| {} | @mainSrc/node_modules/app/index.js | @mainSrc/node_modules/app/plugins.js |
 
 #### filePath
 
 | resolve.alias | import 'lib' | import 'lib/lodash.js' |
 |--------------------|--------------------|-------------------|
-| {lib: '/main/src/comps/lib.js'} | /main/src/comps/lib.js | `error` |
-| {lib: './actions/lib.js'} | /main/src/actions/lib.js | `error` |
-| {lib: 'routes/lib.js'} | /main/src/node_modules/routes/lib.js | `error` |
+| { lib: '@mainSrc/comps/lib.js' } | @mainSrc/comps/lib.js | `error` |
+| { lib: './actions/lib.js' } | @mainSrc/actions/lib.js | `error` |
+| { lib: 'routes/lib.js' } | @mainSrc/node_modules/routes/lib.js | `error` |
 
 #### filePath$
 
 | resolve.alias | import 'utils' | import 'utils/query.js' |
 |--------------------|--------------------|-------------------|
-| {utils$: '/main/src/comps/utils.js'} | /main/src/comps/utils.js  | /main/src/node_modules/utils/query.js |
-| {utils$: './actions/utils.js'} | /main/src/actions/utils.js  | /main/src/node_modules/utils/query.js |
-| {utils$: 'routes/utils.js'} | /main/src/node_modules/routes/utils.js | /main/src/node_modules/utils/query.js |
+| { utils$: '@mainSrc/comps/utils.js' } | @mainSrc/comps/utils.js  | @mainSrc/node_modules/utils/query.js |
+| { utils$: './actions/utils.js' } | @mainSrc/actions/utils.js  | @mainSrc/node_modules/utils/query.js |
+| { utils$: 'routes/utils.js' } | @mainSrc/node_modules/routes/utils.js | @mainSrc/node_modules/utils/query.js |
 
 #### dirPath
 
 | resolve.alias | import 'base' | import 'base/extend.js' |
 |--------------------|--------------------|-------------------|
-| {base: '/main/src/comps'} | /main/src/comps/index.js | /main/src/comps/extend.js |
-| {base: './actions'} | /main/src/actions/index.js | /main/src/actions/extend.js |
-| {base: 'routes'} | /main/src/node_modules/routes/index.js | /main/src/node_modules/routes/extend.js |
+| { base: '@mainSrc/comps' } | @mainSrc/comps/index.js | @mainSrc/comps/extend.js |
+| { base: './actions' } | @mainSrc/actions/index.js | @mainSrc/actions/extend.js |
+| { base: 'routes' } | @mainSrc/node_modules/routes/index.js | @mainSrc/node_modules/routes/extend.js |
 
 #### dirPath$
 
 | resolve.alias | import 'helpers' | import 'helpers/search.js' |
 |--------------------|--------------------|-------------------|
-| {helpers$: '/main/src/comps'} | /main/src/comps/index.js | /main/src/node_modules/helpers/search.js |
-| {helpers$: './actions'} | /main/src/actions/index.js | /main/src/node_modules/helpers/search.js |
-| {helpers$: 'routes'} | /main/src/node_modules/routes/index.js | /main/src/node_modules/helpers/search.js |
+| { helpers$: '@mainSrc/comps' } | @mainSrc/comps/index.js | @mainSrc/node_modules/helpers/search.js |
+| { helpers$: './actions' } | @mainSrc/actions/index.js | @mainSrc/node_modules/helpers/search.js |
+| { helpers$: 'routes' } | @mainSrc/node_modules/routes/index.js | @mainSrc/node_modules/helpers/search.js |

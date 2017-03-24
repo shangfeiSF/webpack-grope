@@ -34,7 +34,7 @@ module.exports = {
       // imported by `resolve_filePath$.js`
       comps_utils$: path.resolve(__dirname, './src/comps/utils.js'),
       actions_utils$: './actions/utils.js',
-      routes_utils$: 'routes/utils.js',
+      routes_utils$: 'routes/utils.jals',
       // imported by `resolve_dirPath.js`
       comps_base: path.resolve(__dirname, './src/comps'),
       actions_base: './actions',
