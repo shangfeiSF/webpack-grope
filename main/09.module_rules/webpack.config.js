@@ -10,9 +10,13 @@ module.exports = {
 
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, 'build'),
-    chunkFilename: '[name].[id].[chunkhash].js',
-    publicPath: 'http://localhost:8080/09/assets/'
+    path: path.join(__dirname, 'build')
+  },
+
+  // why setup node.Buffer to `false` when use 'css-loader' to bundle .css or .less
+  // see issue: https://github.com/webpack-contrib/css-loader/issues/454
+  node: {
+    Buffer: false
   },
 
   module: {
@@ -31,7 +35,6 @@ module.exports = {
           }
         ]
       },
-      // Rule.loader is a shortcut to Rule.use: [ { loader } ]
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -39,7 +42,6 @@ module.exports = {
           presets: ['es2015', 'stage-1', 'stage-2', 'stage-3']
         }
       },
-      // use loaders by chain
       {
         test: /\.less$/,
         use: [
